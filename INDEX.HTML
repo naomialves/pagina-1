@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Você 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .pixel-border {
+            border-style: solid;
+            border-width: 4px;
+            border-color: #fff #999 #999 #fff;
+            background: #2d3047;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Pixelado */
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            position: relative;
+            background: #e94560;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 2px solid #ff9a9e;
+        }
+
+        .main-title {
+            font-size: 1.8em;
+            color: #fff;
+            text-shadow: 3px 3px 0 #000;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .subtitle {
+            font-size: 0.7em;
+            color: #ffd6d6;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        /* Seções Pixeladas */
+        .message-section {
+            background: #533483;
+            padding: 30px;
+            margin: 25px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 1.2em;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .message-text {
+            font-size: 0.8em;
+            color: #fff;
+            text-shadow: 1px 1px 0 #000;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        /* Características Pixeladas */
+        .qualities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .quality-card {
+            background: #40514e;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .quality-card::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 2px solid #30e3ca;
+        }
+
+        .quality-emoji {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            display: block;
+            filter: drop-shadow(2px 2px 0 #000);
+        }
+
+        .quality-title {
+            font-size: 0.9em;
+            color: #30e3ca;
+            margin-bottom: 10px;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        .quality-desc {
+            font-size: 0.6em;
+            color: #fff;
+        }
+
+        /* Corações Pixelados */
+        .pixel-hearts {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .pixel-heart {
+            width: 40px;
+            height: 40px;
+            background: #e94560;
+            position: relative;
+            transform: rotate(45deg);
+            animation: heartbeat 1.5s ease-in-out infinite;
+        }
+
+        .pixel-heart::before,
+        .pixel-heart::after {
+            content: '';
+            width: 40px;
+            height: 40px;
+            background: #e94560;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .pixel-heart::before {
+            top: -20px;
+            left: 0;
+        }
+
+        .pixel-heart::after {
+            top: 0;
+            left: -20px;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: rotate(45deg) scale(1); }
+            50% { transform: rotate(45deg) scale(1.1); }
+        }
+
+        /* Botões Pixelados */
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .pixel-btn {
+            background: #e94560;
+            border: none;
+            padding: 15px 30px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8em;
+            color: #fff;
+            cursor: pointer;
+            margin: 10px;
+            position: relative;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .pixel-btn::before {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 2px solid #ff9a9e;
+        }
+
+        .pixel-btn:hover {
+            background: #ff6b81;
+            transform: translateY(-2px);
+        }
+
+        .pixel-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Música */
+        .music-section {
+            background: #0f3460;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .music-title {
+            font-size: 1.1em;
+            color: #ffd700;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        .lyrics-container {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            margin: 20px 0;
+            border: 3px solid #fff;
+        }
+
+        .lyric-line {
+            font-size: 0.7em;
+            color: #fff;
+            margin: 10px 0;
+            text-shadow: 1px 1px 0 #000;
+        }
+
+        /* Efeitos de Glitch */
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00ff;
+            animation: glitch-1 2s infinite linear alternate-reverse;
+        }
+
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: 2px 0 #00ffff;
+            animation: glitch-2 3s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-1 {
+            0% { clip-path: inset(20% 0 65% 0); }
+            20% { clip-path: inset(60% 0 5% 0); }
+            40% { clip-path: inset(35% 0 40% 0); }
+            60% { clip-path: inset(80% 0 5% 0); }
+            80% { clip-path: inset(15% 0 70% 0); }
+            100% { clip-path: inset(45% 0 30% 0); }
+        }
+
+        @keyframes glitch-2 {
+            0% { clip-path: inset(65% 0 20% 0); }
+            20% { clip-path: inset(5% 0 60% 0); }
+            40% { clip-path: inset(40% 0 35% 0); }
+            60% { clip-path: inset(5% 0 80% 0); }
+            80% { clip-path: inset(70% 0 15% 0); }
+            100% { clip-path: inset(30% 0 45% 0); }
+        }
+
+        /* Pixel Art Decorations */
+        .pixel-decoration {
+            position: fixed;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .pixel-star {
+            width: 8px;
+            height: 8px;
+            background: #ffd700;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .main-title { font-size: 1.3em; }
+            .section-title { font-size: 1em; }
+            .message-text { font-size: 0.7em; }
+            .qualities-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Efeito de Digitação */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #fff;
+            white-space: nowrap;
+            margin: 0 auto;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #fff }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorações Pixeladas -->
+    <div id="pixelDecorations"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header pixel-border">
+            <h1 class="main-title glitch-text" data-text="PARA VOCÊ ">
+                PARA VOCÊ 
+            </h1>
+            <p class="subtitle">Uma mensagem especial de uma pessoa que te admira</p>
+        </header>
+
+        <!-- Mensagem Principal -->
+        <section class="message-section pixel-border">
+            <h2 class="section-title">💌 Algumas palavras meio bobas</h2>
+            <div class="message-text">
+             <p>Primeiramente gostaria de te dizer o quão bonita você está, fiz esse site no intuito de mostrar o quanto gosto de você talvez seja um pouco idiota, se sim perdão.</p>
+            </div>
+            <div class="message-text">
+                <p>Segundamente, gostaria de deixar claro o quanto me preocupo com você, o quanto quero ver você bem e o quanto eu quero você (embora eu ache que deixo isso bem claro) quero poder ver você realizar todos os seus sonhos e definitivamente quero te ver feliz, ou melhor, gostaria de te fazer feliz.</p>
+            </div>
+            <div class="message-text">
+                <p>Espero que esta mensagem consiga transmitir pelo menos um pouco do que sinto por você e o quanto eu te admiro.</p>
+            </div>
+        </section>
+
+        <!-- Qualidades -->
+        <section class="message-section pixel-border">
+            <h2 class="section-title">🌟 O que me faz gostar de você </h2>
+            <div class="qualities-grid">
+                <div class="quality-card pixel-border">
+                    <span class="quality-emoji">😊</span>
+                    <h3 class="quality-title">SEU SORRISO</h3>
+                    <p class="quality-desc">É uma das coisas mais lindas que já vi, principalmente quando você sorri e olha para o nada, isso me faz querer ver você sorrir mais definitivamente. </p>
+                </div>
+                <div class="quality-card pixel-border">
+                    <span class="quality-emoji">💝</span>
+                    <h3 class="quality-title">SUA GENTILEZA</h3>
+                    <p class="quality-desc">A forma como trata as pessoas de forma gentil me encanta um pouco (Emoji com olhos virados para cima), não vou mentir.</p>
+                </div>
+                <div class="quality-card pixel-border">
+                    <span class="quality-emoji">🧠</span>
+                    <h3 class="quality-title">SUA INTELIGÊNCIA</h3>
+                    <p class="quality-desc">A forma como você é incrivelmente inteligente, mas não se gaba sobre isso, senhora embaixadora do SAEB.</p>
+                </div>
+                <div class="quality-card pixel-border">
+                    <span class="quality-emoji">✨</span>
+                    <h3 class="quality-title">SEU ENCANTO</h3>
+                    <p class="quality-desc">E claro o fato de que você é incrivelmente encantadora sem fazer muito esforço, mas não se ache não.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Corações -->
+        <div class="pixel-hearts">
+            <div class="pixel-heart"></div>
+            <div class="pixel-heart"></div>
+            <div class="pixel-heart"></div>
+            <div class="pixel-heart"></div>
+            <div class="pixel-heart"></div>
+        </div>
+
+        <!-- Mensagem Pessoal -->
+        <section class="message-section pixel-border">
+            <h2 class="section-title">💫 O QUE REALMENTE IMPORTA</h2>
+            <div class="message-text">
+                <p>Não são apenas suas qualidades que me encantam, mas a pessoa incrível que você é por dentro.</p>
+            </div>
+            <div class="message-text">
+                <p>Cada gesto de bondade, cada palavra gentil, cada momento em que posso falar com voçê. Tudo isso faz de você alguém realmente especial.</p>
+            </div>
+            <div class="message-text">
+                <p>E eu queria que você soubesse o quanto isso significa para mim.</p>
+            </div>
+        </section>
+
+        <!-- Botões Interativos -->
+        <div class="button-container">
+            <button class="pixel-btn" onclick="revealSecretMessage()">
+                🎮 MENSAGEM SECRETA
+            </button>
+            <button class="pixel-btn" onclick="createHearts()">
+                💖 GERAR CORAÇÕES
+            </button>
+        </div>
+
+        <!-- Mensagem Secreta -->
+        <section id="secretMessage" class="message-section pixel-border" style="display: none;">
+            <h2 class="section-title">🎯 O QUE REALMENTE SINTO</h2>
+            <div class="message-text">
+                <p>A verdade é que eu gosto muito de você. Mais do que as palavras podem expressar.</p>
+            </div>
+            <div class="message-text">
+                <p>Admiro a pessoa que você é, valorizo cada momento que passamos juntas, e espero poder continuar te conhecendo melhor.</p>
+            </div>
+            <div class="message-text">
+                <p>Você é especial, e queria que soubesse disso.</p>
+            </div>
+        </section>
+
+        <!-- Música - Bad by Wave to Earth -->
+        <section class="music-section pixel-border">
+            <h2 class="section-title">🎵 UMA MÚSICA QUE ME LEMBRA VOCÊ</h2>
+            <p class="message-text" style="text-align: center; margin-bottom: 20px;">
+                "Bad" - Wave to Earth<br>
+                <span style="font-size: 0.6em; color: #ffd6d6;">Porque não consigo, mas ouvir essa música sem pensar em voçê.. </span>
+            </p>
+            
+            <div class="lyrics-container">
+                <div class="lyric-line">"I finally"</div>
+                <div class="lyric-line">"Held your hands"</div>
+                <div class="lyric-line">"How could my day be bad"</div>
+                <div class="lyric-line">"When I'm with you?"</div>
+                <div class="lyric-line">"You're the only one "</div>
+                <div class="lyric-line">"Who makes me laugh"</div>
+            </div>
+
+            <div class="message-text" style="text-align: center; margin-top: 20px;">
+                <p>Essa música me lembra você porque...</p>
+                <p style="font-size: 0.7em; color: #ffd6d6; margin-top: 10px;">
+                    Me lembra o quanto voçê alegra meu dia sem esforço  💫
+                </p>
+            </div>
+        </section>
+
+        <!-- Rodapé -->
+        <section class="message-section pixel-border">
+            <h2 class="section-title">💌 COM CARINHO</h2>
+            <div class="message-text" style="text-align: center;">
+                <p>Espero que esta mensagem tenha te feito sorrir.</p>
+                <p>Você merece todo o amor e felicidade do mundo.</p>
+                <p style="margin-top: 20px; color: #ffd700;">Sempre,</p>
+                <p style="color: #ffd700;">Adivinha..</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Criar decorações pixeladas
+        function createPixelDecorations() {
+            const container = document.getElementById('pixelDecorations');
+            const colors = ['#ff6b6b', '#4ecdc4', '#ffd166', '#06d6a0', '#118ab2'];
+            
+            for (let i = 0; i < 20; i++) {
+                const star = document.createElement('div');
+                star.className = 'pixel-decoration pixel-star';
+                star.style.left = Math.random() * 100 + 'vw';
+                star.style.top = Math.random() * 100 + 'vh';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.background = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(star);
+            }
+        }
+
+        // Revelar mensagem secreta
+        function revealSecretMessage() {
+            const secretMessage = document.getElementById('secretMessage');
+            secretMessage.style.display = 'block';
+            secretMessage.scrollIntoView({ behavior: 'smooth' });
+            
+            // Efeito de glitch
+            secretMessage.style.animation = 'glitch-1 0.5s';
+            setTimeout(() => {
+                secretMessage.style.animation = '';
+            }, 500);
+        }
+
+        // Criar corações
+        function createHearts() {
+            const container = document.querySelector('.pixel-hearts');
+            const heart = document.createElement('div');
+            heart.className = 'pixel-heart';
+            container.appendChild(heart);
+            
+            // Remover após animação
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        // Efeito de digitação no título
+        function typeWriterEffect() {
+            const elements = document.querySelectorAll('.message-text p');
+            elements.forEach((element, index) => {
+                const text = element.textContent;
+                element.textContent = '';
+                element.style.overflow = 'hidden';
+                element.style.borderRight = '2px solid #fff';
+                
+                setTimeout(() => {
+                    let i = 0;
+                    const timer = setInterval(() => {
+                        if (i < text.length) {
+                            element.textContent += text.charAt(i);
+                            i++;
+                        } else {
+                            clearInterval(timer);
+                            element.style.borderRight = 'none';
+                        }
+                    }, 50);
+                }, index * 2000);
+            });
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            createPixelDecorations();
+            
+            // Iniciar efeito de digitação após um delay
+            setTimeout(() => {
+                typeWriterEffect();
+            }, 1000);
+            
+            // Criar alguns corações automaticamente
+            setInterval(createHearts, 2000);
+        });
+
+        // Efeito de clique nos botões
+        document.querySelectorAll('.pixel-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.style.transform = 'translateY(0)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-2px)';
+                }, 150);
+            });
+        });
+
+        // Efeito de scroll suave
+        document.querySelectorAll('.pixel-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                if (this.getAttribute('onclick').includes('revealSecretMessage')) {
+                    return;
+                }
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+</html>
