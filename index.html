@@ -313,12 +313,79 @@
             50% { opacity: 1; }
         }
 
+        /* Controle de Música */
+        .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .music-btn {
+            background: #533483;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+            background: #e94560;
+        }
+
+        .music-btn.muted {
+            background: #666;
+        }
+
+        .volume-slider {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            width: 120px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .music-controls:hover .volume-slider {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: all;
+        }
+
+        .volume-slider input {
+            width: 100%;
+            background: #533483;
+            border: 2px solid #fff;
+        }
+
         /* Responsivo */
         @media (max-width: 768px) {
             .main-title { font-size: 1.3em; }
             .section-title { font-size: 1em; }
             .message-text { font-size: 0.7em; }
             .qualities-grid { grid-template-columns: 1fr; }
+            
+            .music-controls {
+                bottom: 10px;
+                right: 10px;
+            }
+            
+            .music-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1em;
+            }
         }
 
         /* Efeito de Digitação */
@@ -344,6 +411,14 @@
 <body>
     <!-- Decorações Pixeladas -->
     <div id="pixelDecorations"></div>
+
+    <!-- Controles de Música -->
+    <div class="music-controls">
+        <div class="volume-slider">
+            <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.5">
+        </div>
+        <button class="music-btn" id="musicToggle">🎵</button>
+    </div>
 
     <div class="container">
         <!-- Header -->
@@ -479,7 +554,74 @@
         </section>
     </div>
 
+    <!-- Elemento de Áudio (oculto) -->
+    <audio id="backgroundMusic" loop>
+        <!-- Substitua esta URL pela URL da sua música -->
+        <source src="Wave_to_Earth_-_Bad_CeeNaija.com_.mp3" type="audio/mpeg">
+    </audio>
+
     <script>
+        // Elementos de áudio
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const musicToggle = document.getElementById('musicToggle');
+        const volumeControl = document.getElementById('volumeControl');
+
+        // Configuração inicial da música
+        let isMusicPlaying = false;
+        
+        // Função para tocar/pausar música
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                backgroundMusic.pause();
+                musicToggle.textContent = '🎵';
+                musicToggle.classList.remove('muted');
+            } else {
+                backgroundMusic.play().catch(e => {
+                    console.log('Reprodução automática bloqueada:', e);
+                    // Se a reprodução automática for bloqueada, mostre um aviso
+                    alert('Clique em qualquer lugar da página para ativar a música!');
+                });
+                musicToggle.textContent = '🔊';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        // Função para ajustar volume
+        function setVolume() {
+            backgroundMusic.volume = volumeControl.value;
+        }
+
+        // Event listeners para controles de música
+        musicToggle.addEventListener('click', toggleMusic);
+        volumeControl.addEventListener('input', setVolume);
+
+        // Tentar iniciar a música automaticamente (pode ser bloqueado pelo navegador)
+        document.addEventListener('DOMContentLoaded', function() {
+            // Espera um pouco antes de tentar tocar
+            setTimeout(() => {
+                backgroundMusic.volume = 0.3; // Volume inicial baixo
+                // Tenta tocar a música (pode ser bloqueado por políticas de autoplay)
+                backgroundMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    musicToggle.textContent = '🔊';
+                }).catch(e => {
+                    console.log('Autoplay bloqueado, aguardando interação do usuário');
+                    isMusicPlaying = false;
+                    musicToggle.textContent = '🎵';
+                });
+            }, 1000);
+        });
+
+        // Permitir que o usuário ative a música clicando em qualquer lugar
+        document.addEventListener('click', function() {
+            if (!isMusicPlaying && backgroundMusic.paused) {
+                backgroundMusic.play().then(() => {
+                    isMusicPlaying = true;
+                    musicToggle.textContent = '🔊';
+                });
+            }
+        });
+
         // Criar decorações pixeladas
         function createPixelDecorations() {
             const container = document.getElementById('pixelDecorations');
@@ -583,4 +725,3 @@
     </script>
 </body>
 </html>
-
